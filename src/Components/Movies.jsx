@@ -26,7 +26,6 @@ const MovieSearchingComp = ({ content, heartHasBeenClicked }) => {
     setGo(true);
     return () => setGo(false);
   }, []);
-  console.log(content);
   return (
     <div className={classes.singleMovieDiv}>
       <Slide direction="up" in={go} timeout={1000}>

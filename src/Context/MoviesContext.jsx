@@ -7,6 +7,9 @@ export const MovieContext = createContext();
 const Provider = ({ children }) => {
   const [movieFetchedData, setMovieFetchedData] = useState(null);
   const [topRatedMovies, setTopRatedMovies] = useState(null);
+  const [isMovieFetchdDataArrEmpty, setIsMovieFetchedDataArrEmpty] = useState(
+    false
+  );
 
   const reqForUserLookingMovie = (movieTitle) => {
     if (movieTitle.length === 0) return;
@@ -14,7 +17,12 @@ const Provider = ({ children }) => {
       .get(
         `https://api.themoviedb.org/3/search/movie?api_key=f22facd72eb81c0963f9b977fbb7553c&query=${movieTitle}`
       )
-      .then((res) => setMovieFetchedData(res.data));
+      .then((res) => {
+        if (res.data.results.length === 0) {
+          setIsMovieFetchedDataArrEmpty(true);
+        } else setIsMovieFetchedDataArrEmpty(false);
+        setMovieFetchedData(res.data);
+      });
   };
   useEffect(() => {
     axios
@@ -40,6 +48,7 @@ const Provider = ({ children }) => {
         movieFetchedData,
         topMovies: topRatedMovies,
         getMovie,
+        isMovieArrEmpty: isMovieFetchdDataArrEmpty,
       }}
     >
       {children}

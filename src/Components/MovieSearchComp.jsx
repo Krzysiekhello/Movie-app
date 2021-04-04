@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 
 import Movies from "./Movies";
+import ProblemComp from "./ProblemComp";
 
 import { MovieContext } from "../Context/MoviesContext";
 
@@ -19,9 +20,12 @@ import useStyles from "../Styles/MovieSearch";
 import AppBarComp from "../Components/AppBar";
 const MovieSearchComp = () => {
   const classes = useStyles();
-  const { reqForUserLookingMovie, topMovies, movieFetchedData } = useContext(
-    MovieContext
-  );
+  const {
+    reqForUserLookingMovie,
+    topMovies,
+    movieFetchedData,
+    isMovieArrEmpty,
+  } = useContext(MovieContext);
   const [
     titleOfMovieYouAreLookingFor,
     setTitleOfMovieYouAreLookingFor,
@@ -47,6 +51,12 @@ const MovieSearchComp = () => {
   const topRatedMoviesList = topMovies.results.map((movie, index) => (
     <Movies key={index} content={movie} />
   ));
+  useEffect(() => {
+    return () => {
+      setTitleOfMovieYouAreLookingFor("");
+      setUserName("");
+    };
+  }, []);
 
   return (
     <>
@@ -93,12 +103,14 @@ const MovieSearchComp = () => {
           </form>
           {!movieFetchedData ? (
             <div> {topRatedMoviesList}</div>
-          ) : (
+          ) : !isMovieArrEmpty ? (
             <div>
               {movieFetchedData.results.map((movie, index) => (
                 <Movies key={index} content={movie} />
               ))}
             </div>
+          ) : (
+            <ProblemComp />
           )}
         </div>
         <Snackbar
