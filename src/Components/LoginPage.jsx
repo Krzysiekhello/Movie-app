@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
+import Checkbox from "@material-ui/core/Checkbox";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -12,13 +14,16 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faUsers } from "@fortawesome/free-solid-svg-icons";
 
+import { LoginContext } from "../Context/LoginContext";
 import useStyles from "../Styles/loginPage";
 
 const LoginPage = ({ setIsDataCorrect }) => {
   const classes = useStyles();
+  const { handleLocalStorage } = useContext(LoginContext);
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [checkbox, setCheckbox] = useState(false);
   const [isItLoginOrPasswordEmpty, setIsItLoginOrPasswordEmpty] = useState(
     false
   );
@@ -39,16 +44,27 @@ const LoginPage = ({ setIsDataCorrect }) => {
 
     if (password.length < 6) return setIsItLoginOrPasswordEmpty(true);
 
-    if (login !== "admin" && password.toString() !== "123456") {
+    if (password.toString() !== "12345a") {
       setIsItLoginOrPasswordIncorect(true);
 
       setTimeout(() => {
         setIsItLoginOrPasswordIncorect(false);
       }, 3000);
     } else {
-      return setIsDataCorrect(true);
+      setIsDataCorrect(true);
+      return handleLocalStorage(login, checkbox);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      setLogin("");
+      setPassword("");
+      setCheckbox(false);
+      setIsItLoginOrPasswordEmpty(false);
+      setIsItLoginOrPasswordIncorect(false);
+    };
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -107,7 +123,16 @@ const LoginPage = ({ setIsDataCorrect }) => {
               helperText={isItLoginOrPasswordEmpty && "Min. 6 characters"}
               error={isItLoginOrPasswordEmpty}
             />
-
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="checkbox"
+                  value={checkbox}
+                  onClick={() => setCheckbox((prevState) => !prevState)}
+                />
+              }
+              label="Remember Me"
+            />
             <Button
               type="submit"
               variant="contained"

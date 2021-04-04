@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => {
       position: "relative",
       height: "100vh",
       width: "100vw",
-      backgroundColor: "#ef5350",
+      backgroundColor: "#2196f3",
     },
     loginPageAlert: {
       position: "absolute",
