@@ -14,7 +14,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 
-import useStyles from "../Styles/MovieSearch";
+import useStyles from "../Styles/MovieSearchStyles";
 
 const AppBarComp = () => {
   const classes = useStyles();
@@ -51,15 +51,15 @@ const AppBarComp = () => {
         <List>
           <ListItem button>
             <ListItemIcon></ListItemIcon>
-            <Link to="Main">Main</Link>
+            <Link to="/">Main</Link>
           </ListItem>
           <ListItem button>
             <ListItemIcon></ListItemIcon>
-            <Link to="Saved">Saved</Link>
+            <Link to="saved">Saved</Link>
           </ListItem>
           <ListItem button>
             <ListItemIcon></ListItemIcon>
-            <Link to="Contact">Contact</Link>
+            <Link to="contact">Contact</Link>
           </ListItem>
         </List>
       </Drawer>

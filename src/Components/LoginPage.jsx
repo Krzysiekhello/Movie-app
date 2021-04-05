@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faUsers } from "@fortawesome/free-solid-svg-icons";
 
 import { LoginContext } from "../Context/LoginContext";
-import useStyles from "../Styles/loginPage";
+import useStyles from "../Styles/LoginPageStyles";
 
 const LoginPage = ({ setIsDataCorrect }) => {
   const classes = useStyles();

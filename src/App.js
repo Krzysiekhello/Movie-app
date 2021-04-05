@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
@@ -9,6 +9,7 @@ import MovieProvider from "./Context/MoviesContext";
 
 import LoginPage from "./Components/LoginPage";
 import MovieSearchComp from "./Components/MovieSearchComp";
+import SavedMovies from "./Components/SavedMovies";
 
 function App() {
   const [isLoginAndPasswordCorrect, setIsLoginAndPasswordCorrect] = useState(
@@ -29,7 +30,11 @@ function App() {
               {!isLoginAndPasswordCorrect ? (
                 <LoginPage setIsDataCorrect={setIsLoginAndPasswordCorrect} />
               ) : (
-                <MovieSearchComp />
+                <>
+                  <Route path="/" exact component={MovieSearchComp} />
+                  <Route path="/saved" component={SavedMovies} />
+                  {/* <Route path="/contact" component={MovieSearchComp} /> */}
+                </>
               )}
             </div>
           </ThemeProvider>

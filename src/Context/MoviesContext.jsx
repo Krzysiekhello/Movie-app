@@ -33,12 +33,32 @@ const Provider = ({ children }) => {
   }, []);
   const getMovie = (e, title, posterPath, movieRate) => {
     e.preventDefault();
-    const one = JSON.parse(localStorage.getItem("movies" || "[]"));
-    const two = one.filter((el) => el.title === title);
-    if (two.length !== 0) return;
+    const arrayWithSavedMovies = JSON.parse(
+      localStorage.getItem("savedMovies" || "[]")
+    );
+    if (arrayWithSavedMovies !== 0) {
+      const isMovieAlreadyInSavedMovieArr = arrayWithSavedMovies.filter(
+        (el) => el.title === title
+      );
+      if (isMovieAlreadyInSavedMovieArr.length > 0) return;
+    }
 
-    one.push({ title, posterPath, movieRate });
-    localStorage.setItem("movies", JSON.stringify(one));
+    arrayWithSavedMovies.push({ title, posterPath, movieRate });
+    localStorage.setItem("savedMovies", JSON.stringify(arrayWithSavedMovies));
+  };
+
+  const deleteMovieFromSavedMovies = (e, title) => {
+    e.preventDefault();
+    const arrayWithSavedMovies = JSON.parse(
+      localStorage.getItem("savedMovies")
+    );
+    const arrayWithoutDeletedMovie = arrayWithSavedMovies.filter(
+      (movie) => movie.title !== title
+    );
+    localStorage.setItem(
+      "savedMovies",
+      JSON.stringify(arrayWithoutDeletedMovie)
+    );
   };
 
   return (
@@ -49,6 +69,7 @@ const Provider = ({ children }) => {
         topMovies: topRatedMovies,
         getMovie,
         isMovieArrEmpty: isMovieFetchdDataArrEmpty,
+        deleteMovieFromSavedMovies,
       }}
     >
       {children}

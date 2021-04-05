@@ -5,7 +5,7 @@ import { faSadCry } from "@fortawesome/free-solid-svg-icons";
 
 import { Card, Typography, CardContent, Slide } from "@material-ui/core";
 
-import useStyles from "../Styles/Movies";
+import useStyles from "../Styles/SingleSearchMovieStyles";
 
 const ProblemComp = () => {
   const classes = useStyles();

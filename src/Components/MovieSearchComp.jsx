@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 
-import Movies from "./Movies";
+import Movies from "./SingleSearchMovie";
 import ProblemComp from "./ProblemComp";
 
 import { MovieContext } from "../Context/MoviesContext";
@@ -15,7 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 
-import useStyles from "../Styles/MovieSearch";
+import useStyles from "../Styles/MovieSearchStyles";
 
 import AppBarComp from "../Components/AppBar";
 const MovieSearchComp = () => {
@@ -51,6 +51,7 @@ const MovieSearchComp = () => {
   const topRatedMoviesList = topMovies.results.map((movie, index) => (
     <Movies key={index} content={movie} />
   ));
+  console.log(topMovies.results);
   useEffect(() => {
     return () => {
       setTitleOfMovieYouAreLookingFor("");

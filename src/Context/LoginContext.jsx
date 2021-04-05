@@ -6,7 +6,7 @@ const Provider = ({ children }) => {
   const handleLocalStorage = (name, rememberMe) => {
     localStorage.setItem("rememberMe", rememberMe);
     localStorage.setItem("name", rememberMe ? name : "");
-    localStorage.setItem("movies", "[]");
+    localStorage.setItem("savedMovies", "[]");
   };
   return (
     <LoginContext.Provider value={{ handleLocalStorage }}>
