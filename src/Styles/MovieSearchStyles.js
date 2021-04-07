@@ -8,9 +8,6 @@ const useStyles = makeStyles((theme) => {
       backgroundColor: "#2196f3",
       alignItems: "center",
     },
-    appBar: {
-      backgroundColor: "#ef6c00",
-    },
 
     card: {
       position: "absolute",

@@ -14,7 +14,14 @@ import ListItem from "@material-ui/core/ListItem";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 
-import useStyles from "../Styles/MovieSearchStyles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faHeart,
+  faEnvelopeOpen,
+} from "@fortawesome/free-solid-svg-icons";
+
+import useStyles from "../Styles/AppBarStyles";
 
 const AppBarComp = () => {
   const classes = useStyles();
@@ -25,7 +32,7 @@ const AppBarComp = () => {
   };
 
   return (
-    <>
+    <div className={classes.root}>
       <AppBar position="fixed" elevation={12} className={classes.appBar}>
         <Toolbar>
           <IconButton
@@ -42,28 +49,40 @@ const AppBarComp = () => {
         </Toolbar>
       </AppBar>
       <Drawer variant="persistent" anchor="left" open={open ? true : false}>
-        <div>
+        <div className={classes.drawerSectionWithButton}>
           <IconButton onClick={() => toggleDrawer()}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <Link to="/">Main</Link>
+        <List className={classes.drawerList}>
+          <ListItem divider>
+            <Link to="/" className={classes.appBarLink}>
+              <ListItemIcon>
+                <FontAwesomeIcon icon={faHome} />
+              </ListItemIcon>
+              Search movie
+            </Link>
           </ListItem>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <Link to="saved">Saved</Link>
+          <ListItem divider>
+            <Link to="saved" className={classes.appBarLink}>
+              <ListItemIcon>
+                <FontAwesomeIcon icon={faHeart} />
+              </ListItemIcon>
+              Saved movies
+            </Link>
           </ListItem>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <Link to="contact">Contact</Link>
+          <ListItem divider>
+            <Link to="contact" className={classes.appBarLink}>
+              <ListItemIcon>
+                <FontAwesomeIcon icon={faEnvelopeOpen} />
+              </ListItemIcon>
+              Contact
+            </Link>
           </ListItem>
         </List>
       </Drawer>
-    </>
+    </div>
   );
 };
 

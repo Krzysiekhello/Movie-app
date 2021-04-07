@@ -12,11 +12,7 @@ const ProblemComp = () => {
   return (
     <div className={classes.singleMovieDiv}>
       <Slide direction="right" in={true} timeout={1000}>
-        <Card
-          elevation={0}
-          className={classes.singleMovieCard}
-          style={{ backgroundColor: "#2196f3" }}
-        >
+        <Card elevation={0} className={classes.problemCard}>
           <CardContent>
             <Typography align="center" variant="h1" component="h1">
               Sorry,

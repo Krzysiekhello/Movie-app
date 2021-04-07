@@ -1,11 +1,8 @@
 import { useState } from "react";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-
-import LoginProvider from "./Context/LoginContext";
-import MovieProvider from "./Context/MoviesContext";
 
 import LoginPage from "./Components/LoginPage";
 import MovieSearchComp from "./Components/MovieSearchComp";
@@ -15,6 +12,7 @@ function App() {
   const [isLoginAndPasswordCorrect, setIsLoginAndPasswordCorrect] = useState(
     false
   );
+  const [openSnackBar, setOpenSnackbar] = useState(true);
 
   const theme = createMuiTheme({
     typography: {
@@ -23,23 +21,28 @@ function App() {
   });
   return (
     <Router>
-      <MovieProvider>
-        <LoginProvider>
-          <ThemeProvider theme={theme}>
-            <div>
-              {!isLoginAndPasswordCorrect ? (
-                <LoginPage setIsDataCorrect={setIsLoginAndPasswordCorrect} />
-              ) : (
-                <>
-                  <Route path="/" exact component={MovieSearchComp} />
-                  <Route path="/saved" component={SavedMovies} />
-                  {/* <Route path="/contact" component={MovieSearchComp} /> */}
-                </>
-              )}
-            </div>
-          </ThemeProvider>
-        </LoginProvider>
-      </MovieProvider>
+      <ThemeProvider theme={theme}>
+        <div>
+          {!isLoginAndPasswordCorrect ? (
+            <LoginPage setIsDataCorrect={setIsLoginAndPasswordCorrect} />
+          ) : (
+            <Switch>
+              <Route
+                path="/"
+                exact
+                render={() => (
+                  <MovieSearchComp
+                    openSnackBar={openSnackBar}
+                    setOpenSnackbar={setOpenSnackbar}
+                  />
+                )}
+              />
+              <Route path="/saved" render={() => <SavedMovies />} />
+              {/* <Route path="/contact" component={MovieSearchComp} /> */}
+            </Switch>
+          )}
+        </div>
+      </ThemeProvider>
     </Router>
   );
 }

@@ -9,26 +9,27 @@ const useStyles = makeStyles((theme) => {
         padding: "10px",
       },
     },
-    // singleMovieDivAcitve: {
-    //   opacity: 1,
-    //   padding: "20px",
-    // },
+
     singleMovieCard: {
       position: "relative",
-
       backgroundColor: "#ef6c00",
     },
 
     singleMovieCardMedia: {
-      height: "11rem",
+      height: "485px",
     },
 
     singleMovieFavouriteHeart: {
       position: "absolute",
-      bottom: 0,
+      bottom: "8.5%",
       left: 0,
     },
+
     // ////////////////////////////////////////////////////////////ProblemAlertComp
+    problemCard: {
+      minHeight: "60vh",
+      backgroundColor: "#2196f3",
+    },
     sadFace: {
       position: "absolute",
       right: "50%",
@@ -36,6 +37,7 @@ const useStyles = makeStyles((theme) => {
       transform: "translateX(50%)",
       fontSize: "200px",
       animation: `$rollingSadFace 5000ms ${theme.transitions.easing.easeInOut}`,
+      zIndex: 100,
     },
     "@keyframes rollingSadFace": {
       "0%": {

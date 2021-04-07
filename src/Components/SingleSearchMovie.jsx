@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 
 import { MovieContext } from "../Context/MoviesContext";
+import { ModalContext } from "../Context/DialogContext";
 
 import {
   Card,
@@ -11,6 +12,7 @@ import {
   IconButton,
   CardActionArea,
   Slide,
+  Button,
 } from "@material-ui/core";
 
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -20,8 +22,12 @@ import useStyles from "../Styles/SingleSearchMovieStyles";
 const MovieSearchingComp = ({ content }) => {
   const classes = useStyles();
   const [go, setGo] = useState(false);
-  const { title, poster_path, vote_average } = content;
+
+  const { title, poster_path, vote_average, overview, release_date } = content;
+
   const { getMovie } = useContext(MovieContext);
+
+  const { handleModal } = useContext(ModalContext);
 
   useEffect(() => {
     setGo(true);
@@ -49,14 +55,37 @@ const MovieSearchingComp = ({ content }) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <div>
+            <div
+              style={{
+                flexGrow: 1,
+              }}
+            >
               <IconButton
-                aria-label="add to favorites "
-                onClick={(e) => getMovie(e, title, poster_path, vote_average)}
+                aria-label="add to favorites"
+                fullWidth={true}
+                onClick={(e) =>
+                  getMovie(
+                    e,
+                    title,
+                    poster_path,
+                    vote_average,
+                    overview,
+                    release_date
+                  )
+                }
                 className={classes.singleMovieFavouriteHeart}
               >
                 <FavoriteIcon fontSize="large" />
               </IconButton>
+              <Button
+                variant="contained"
+                fullWidth={true}
+                onClick={(e) =>
+                  handleModal(e, title, vote_average, overview, release_date)
+                }
+              >
+                Read more
+              </Button>
             </div>
           </CardActions>
         </Card>

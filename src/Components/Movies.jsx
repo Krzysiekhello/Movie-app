@@ -20,12 +20,16 @@ import useStyles from "../Styles/Movies";
 const MovieSearchingComp = ({ content, heartHasBeenClicked }) => {
   const classes = useStyles();
   const [go, setGo] = useState(false);
+
   const { title, poster_path, vote_average } = content;
+
   const { getMovie } = useContext(MovieContext);
+
   useEffect(() => {
     setGo(true);
     return () => setGo(false);
   }, []);
+
   return (
     <div className={classes.singleMovieDiv}>
       <Slide direction="up" in={go} timeout={1000}>

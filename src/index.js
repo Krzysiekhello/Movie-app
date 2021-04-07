@@ -1,11 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import LoginProvider from "./Context/LoginContext";
+import MovieProvider from "./Context/MoviesContext";
+import ModalProvider from "./Context/DialogContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <LoginProvider>
+      <MovieProvider>
+        <ModalProvider>
+          <App />
+        </ModalProvider>
+      </MovieProvider>
+    </LoginProvider>
   </React.StrictMode>,
+
   document.getElementById("root")
 );
 

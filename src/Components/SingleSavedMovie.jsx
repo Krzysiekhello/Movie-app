@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
-import useStyles from "../Styles/SingleSavedMovieStyles";
 import { MovieContext } from "../Context/MoviesContext";
+import { ModalContext } from "../Context/DialogContext";
 
 import {
   Card,
@@ -12,15 +12,21 @@ import {
   IconButton,
   CardActionArea,
   Slide,
+  Button,
 } from "@material-ui/core";
 
 import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 
+import useStyles from "../Styles/SingleSavedMovieStyles";
+
 const SingleSavedMovie = ({ content, render }) => {
   const classes = useStyles();
 
-  const { title, posterPath } = content;
+  const { title, posterPath, movieRate, description, relaseDate } = content;
+
   const { deleteMovieFromSavedMovies } = useContext(MovieContext);
+
+  const { handleModal } = useContext(ModalContext);
 
   const deletingMovieAndRenderingComp = (e, title) => {
     e.preventDefault();
@@ -30,7 +36,7 @@ const SingleSavedMovie = ({ content, render }) => {
 
   return (
     <div className={classes.root}>
-      <Slide direction="up" in={true} timeout={1000}>
+      <Slide direction="down" in={true} timeout={1000}>
         <Card elevation={12} className={classes.singleSavedMovieCard}>
           <CardActionArea>
             <CardMedia
@@ -43,10 +49,9 @@ const SingleSavedMovie = ({ content, render }) => {
             <Typography align="center" variant="h5" component="h2">
               {title}
             </Typography>
-            <Typography align="center" variant="h5" component="h4"></Typography>
           </CardContent>
           <CardActions>
-            <div>
+            <div style={{ flexGrow: 1 }}>
               <IconButton
                 aria-label="delte from favourties"
                 className={classes.singleSavedMovieDeleteButton}
@@ -58,6 +63,15 @@ const SingleSavedMovie = ({ content, render }) => {
                   }}
                 />
               </IconButton>
+              <Button
+                variant="contained"
+                fullWidth={true}
+                onClick={(e) =>
+                  handleModal(e, title, movieRate, description, relaseDate)
+                }
+              >
+                Read more
+              </Button>
             </div>
           </CardActions>
         </Card>

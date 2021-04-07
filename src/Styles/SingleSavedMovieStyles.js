@@ -5,6 +5,7 @@ const useStyles = makeStyles((theme) => {
     root: {
       padding: "20px",
       transition: "0.3s linear",
+
       "&:hover": {
         padding: "10px",
       },
@@ -15,11 +16,11 @@ const useStyles = makeStyles((theme) => {
     },
 
     singleSavedMovieCardMedia: {
-      height: "11rem",
+      height: "565px",
     },
     singleSavedMovieDeleteButton: {
       position: "absolute",
-      bottom: 0,
+      bottom: "8.5%",
       left: 0,
     },
   };

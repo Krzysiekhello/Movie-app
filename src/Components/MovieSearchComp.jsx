@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 
+import AppBarComp from "../Components/AppBar";
 import Movies from "./SingleSearchMovie";
+import MovieInfoModal from "./MovieInfoDialog";
 import ProblemComp from "./ProblemComp";
 
 import { MovieContext } from "../Context/MoviesContext";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVideo } from "@fortawesome/free-solid-svg-icons";
+import { ModalContext } from "../Context/DialogContext";
 
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -15,49 +15,54 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faVideo } from "@fortawesome/free-solid-svg-icons";
+
 import useStyles from "../Styles/MovieSearchStyles";
 
-import AppBarComp from "../Components/AppBar";
-const MovieSearchComp = () => {
+const MovieSearchComp = ({ openSnackBar, setOpenSnackbar }) => {
   const classes = useStyles();
+  const [userName, setUserName] = useState("");
+
   const {
     reqForUserLookingMovie,
     topMovies,
     movieFetchedData,
     isMovieArrEmpty,
   } = useContext(MovieContext);
+
   const [
     titleOfMovieYouAreLookingFor,
     setTitleOfMovieYouAreLookingFor,
   ] = useState("");
-  const [userName, setUserName] = useState("");
 
   const fieldValueHandler = (e) => {
     e.preventDefault();
     setTitleOfMovieYouAreLookingFor(e.target.value);
   };
-
   useEffect(() => {
     const rememberMe = localStorage.getItem("rememberMe") === "true";
     const user = rememberMe ? localStorage.getItem("name") : "";
 
     setUserName(user);
-
     setTimeout(() => {
-      setUserName("");
+      setOpenSnackbar(false);
     }, 4000);
   }, []);
 
   const topRatedMoviesList = topMovies.results.map((movie, index) => (
     <Movies key={index} content={movie} />
   ));
-  console.log(topMovies.results);
+
   useEffect(() => {
     return () => {
       setTitleOfMovieYouAreLookingFor("");
       setUserName("");
     };
   }, []);
+  const { movieInformation, openModal, setOpenModal } = useContext(
+    ModalContext
+  );
 
   return (
     <>
@@ -118,9 +123,17 @@ const MovieSearchComp = () => {
           transitionDuration={500}
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
           message={`Hello ${userName}, it's nice to see you`}
-          open={userName ? true : false}
+          open={openSnackBar ? true : false}
         ></Snackbar>
       </div>
+      {movieInformation && (
+        <MovieInfoModal
+          hideBackdrop={false}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          movieInformations={movieInformation}
+        />
+      )}
     </>
   );
 };

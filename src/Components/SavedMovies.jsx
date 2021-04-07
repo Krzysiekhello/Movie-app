@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import AppBar from "./AppBar";
 import SingleSavedMovie from "./SingleSavedMovie";
+import MovieInfoModal from "./MovieInfoDialog";
+
+import { ModalContext } from "../Context/DialogContext";
 
 import Typography from "@material-ui/core/Typography";
 
@@ -15,6 +18,9 @@ const SavedMovies = () => {
   const singleMovie = arrayWithSavedMovies.map((savedMovie, index) => (
     <SingleSavedMovie key={index} content={savedMovie} render={rerender} />
   ));
+  const { movieInformation, openModal, setOpenModal } = useContext(
+    ModalContext
+  );
 
   return (
     <div className={classes.root}>
@@ -27,7 +33,23 @@ const SavedMovies = () => {
       >
         Your fav movies
       </Typography>
-      <div>{singleMovie}</div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: "100%",
+        }}
+      >
+        {singleMovie}
+      </div>
+      {movieInformation && (
+        <MovieInfoModal
+          hideBackdrop={false}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          movieInformations={movieInformation}
+        />
+      )}
     </div>
   );
 };

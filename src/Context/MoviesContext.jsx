@@ -24,6 +24,7 @@ const Provider = ({ children }) => {
         setMovieFetchedData(res.data);
       });
   };
+
   useEffect(() => {
     axios
       .get(
@@ -31,19 +32,36 @@ const Provider = ({ children }) => {
       )
       .then((res) => setTopRatedMovies(res.data));
   }, []);
-  const getMovie = (e, title, posterPath, movieRate) => {
+
+  const getMovie = (
+    e,
+    title,
+    posterPath,
+    movieRate,
+    description,
+    relaseDate
+  ) => {
     e.preventDefault();
+
     const arrayWithSavedMovies = JSON.parse(
       localStorage.getItem("savedMovies" || "[]")
     );
+
     if (arrayWithSavedMovies !== 0) {
       const isMovieAlreadyInSavedMovieArr = arrayWithSavedMovies.filter(
         (el) => el.title === title
       );
+
       if (isMovieAlreadyInSavedMovieArr.length > 0) return;
     }
 
-    arrayWithSavedMovies.push({ title, posterPath, movieRate });
+    arrayWithSavedMovies.push({
+      title,
+      posterPath,
+      movieRate,
+      description,
+      relaseDate,
+    });
     localStorage.setItem("savedMovies", JSON.stringify(arrayWithSavedMovies));
   };
 
