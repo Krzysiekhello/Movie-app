@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => {
       [`${theme.breakpoints.up("sm")} and (orientation: landscape)`]: {
         height: "90%",
       },
+      [`${theme.breakpoints.up("md")} `]: {
+        width: "40%",
+      },
     },
     loginPageIcon: {
       position: "absolute",

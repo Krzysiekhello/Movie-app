@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
+import ContactComp from "./Components/ContactComp";
 import LoginPage from "./Components/LoginPage";
 import MovieSearchComp from "./Components/MovieSearchComp";
 import SavedMovies from "./Components/SavedMovies";
@@ -38,7 +39,7 @@ function App() {
                 )}
               />
               <Route path="/saved" render={() => <SavedMovies />} />
-              {/* <Route path="/contact" component={MovieSearchComp} /> */}
+              <Route path="/contact" component={ContactComp} />
             </Switch>
           )}
         </div>

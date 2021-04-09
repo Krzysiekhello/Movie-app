@@ -16,16 +16,37 @@ const useStyles = makeStyles((theme) => {
       boxShadow: theme.shadows[12],
       padding: theme.spacing(2, 4, 3),
       backgroundColor: "#2196f3",
+      [`${theme.breakpoints.up("md")}`]: {
+        width: "60%",
+        left: "36%",
+      },
     },
     modalReadMoremModal: {
       margin: "5px 0",
     },
+    dialogImage: {
+      height: "100%",
+
+      [`${theme.breakpoints.up("md")}`]: {
+        position: "absolute",
+        height: "90%",
+        top: "50%",
+        transform: "translateY(-50%)",
+        right: "2.5%",
+        borderRadius: "10px",
+      },
+    },
     dialogCloseButton: {
       position: "absolute",
-      left: -10,
-      top: "4.5%",
+      left: -8,
+      top: "4.8%",
       zIndex: "10",
-      fontSize: "70px",
+      fontSize: "65px",
+      backgroundColor: "ef6c00",
+      [`${theme.breakpoints.up("md")}`]: {
+        left: "3%",
+        top: "4%",
+      },
     },
   };
 });

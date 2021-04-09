@@ -4,13 +4,16 @@ import App from "./App";
 import LoginProvider from "./Context/LoginContext";
 import MovieProvider from "./Context/MoviesContext";
 import ModalProvider from "./Context/DialogContext";
+import { SnackbarProvider } from "notistack";
 
 ReactDOM.render(
   <React.StrictMode>
     <LoginProvider>
       <MovieProvider>
         <ModalProvider>
-          <App />
+          <SnackbarProvider>
+            <App />
+          </SnackbarProvider>
         </ModalProvider>
       </MovieProvider>
     </LoginProvider>

@@ -12,23 +12,31 @@ const useStyles = makeStyles((theme) => {
     card: {
       position: "absolute",
       left: "50%",
-      top: "10%",
+      top: "9%",
       transform: "translate(-50%,0)",
       backgroundColor: "transparent",
       [`${theme.breakpoints.only("xs")} and (orientation:portrait)`]: {
         width: "68%",
       },
+      [`${theme.breakpoints.up("md")}`]: {
+        top: "13%",
+      },
     },
     searchingButton: {
-      marginLeft: "5px",
-      marginRight: "5px",
+      margin: "0 5px",
       backgroundColor: "#ef6c00",
-      zIndex: 10,
       "&:active": {
         backgroundColor: "#ef6c00",
       },
       "&:focus": {
         backgroundColor: "#ef6c00",
+      },
+    },
+    singleMovieDivs: {
+      [`${theme.breakpoints.up("md")}`]: {
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
       },
     },
     text: {

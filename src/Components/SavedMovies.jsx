@@ -21,6 +21,7 @@ const SavedMovies = () => {
   const { movieInformation, openModal, setOpenModal } = useContext(
     ModalContext
   );
+  console.log(movieInformation);
 
   return (
     <div className={classes.root}>
@@ -33,15 +34,7 @@ const SavedMovies = () => {
       >
         Your fav movies
       </Typography>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-        }}
-      >
-        {singleMovie}
-      </div>
+      <div className={classes.singleMovieDiv}>{singleMovie}</div>
       {movieInformation && (
         <MovieInfoModal
           hideBackdrop={false}

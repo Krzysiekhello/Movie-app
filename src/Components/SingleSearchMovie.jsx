@@ -16,19 +16,21 @@ import {
 } from "@material-ui/core";
 
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import useStyles from "../Styles/SingleSearchMovieStyles";
 
 const MovieSearchingComp = ({ content }) => {
   const classes = useStyles();
   const [go, setGo] = useState(false);
+  const [savedMovie, setSavedMovie] = useState(false);
 
   const { title, poster_path, vote_average, overview, release_date } = content;
 
   const { getMovie } = useContext(MovieContext);
 
   const { handleModal } = useContext(ModalContext);
-
+  // console.log(itemss);
   useEffect(() => {
     setGo(true);
     return () => setGo(false);
@@ -63,7 +65,7 @@ const MovieSearchingComp = ({ content }) => {
               <IconButton
                 aria-label="add to favorites"
                 fullWidth={true}
-                onClick={(e) =>
+                onClick={(e) => {
                   getMovie(
                     e,
                     title,
@@ -71,17 +73,29 @@ const MovieSearchingComp = ({ content }) => {
                     vote_average,
                     overview,
                     release_date
-                  )
-                }
+                  );
+                  setSavedMovie(true);
+                }}
                 className={classes.singleMovieFavouriteHeart}
               >
-                <FavoriteIcon fontSize="large" />
+                {savedMovie ? (
+                  <FavoriteIcon fontSize="large" />
+                ) : (
+                  <FavoriteBorderIcon fontSize="large" />
+                )}
               </IconButton>
               <Button
                 variant="contained"
                 fullWidth={true}
                 onClick={(e) =>
-                  handleModal(e, title, vote_average, overview, release_date)
+                  handleModal(
+                    e,
+                    title,
+                    vote_average,
+                    overview,
+                    release_date,
+                    poster_path
+                  )
                 }
               >
                 Read more

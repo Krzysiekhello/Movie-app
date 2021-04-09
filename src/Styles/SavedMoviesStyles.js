@@ -12,6 +12,19 @@ const useStyles = makeStyles((theme) => {
 
     savedMoviesTypography: {
       marginTop: "55px",
+      [`${theme.breakpoints.up("md")}`]: {
+        marginTop: "70px",
+      },
+    },
+    singleMovieDiv: {
+      display: "flex",
+      flexDirection: "column",
+      width: "100%",
+      [`${theme.breakpoints.up("md")}`]: {
+        flexDirection: "row",
+        justifyContent: "center",
+        flexWrap: "wrap",
+      },
     },
   };
 });

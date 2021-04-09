@@ -31,6 +31,10 @@ const MovieSearchComp = ({ openSnackBar, setOpenSnackbar }) => {
     isMovieArrEmpty,
   } = useContext(MovieContext);
 
+  const { movieInformation, openModal, setOpenModal } = useContext(
+    ModalContext
+  );
+
   const [
     titleOfMovieYouAreLookingFor,
     setTitleOfMovieYouAreLookingFor,
@@ -48,7 +52,7 @@ const MovieSearchComp = ({ openSnackBar, setOpenSnackbar }) => {
     setTimeout(() => {
       setOpenSnackbar(false);
     }, 4000);
-  }, []);
+  }, [setOpenSnackbar]);
 
   const topRatedMoviesList = topMovies.results.map((movie, index) => (
     <Movies key={index} content={movie} />
@@ -60,9 +64,6 @@ const MovieSearchComp = ({ openSnackBar, setOpenSnackbar }) => {
       setUserName("");
     };
   }, []);
-  const { movieInformation, openModal, setOpenModal } = useContext(
-    ModalContext
-  );
 
   return (
     <>
@@ -89,7 +90,7 @@ const MovieSearchComp = ({ openSnackBar, setOpenSnackbar }) => {
                     variant="filled"
                     value={titleOfMovieYouAreLookingFor}
                     onChange={(e) => fieldValueHandler(e)}
-                    className="text"
+                    className={classes.text}
                   />
                 </Grid>
                 <Grid item>
@@ -108,9 +109,9 @@ const MovieSearchComp = ({ openSnackBar, setOpenSnackbar }) => {
             </Card>
           </form>
           {!movieFetchedData ? (
-            <div> {topRatedMoviesList}</div>
+            <div className={classes.singleMovieDivs}> {topRatedMoviesList}</div>
           ) : !isMovieArrEmpty ? (
-            <div>
+            <div className={classes.singleMovieDivs}>
               {movieFetchedData.results.map((movie, index) => (
                 <Movies key={index} content={movie} />
               ))}

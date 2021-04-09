@@ -67,7 +67,7 @@ const SingleSavedMovie = ({ content, render }) => {
                 variant="contained"
                 fullWidth={true}
                 onClick={(e) =>
-                  handleModal(e, title, movieRate, description, relaseDate)
+                  handleModal(e, title, movieRate, description, relaseDate,posterPath)
                 }
               >
                 Read more

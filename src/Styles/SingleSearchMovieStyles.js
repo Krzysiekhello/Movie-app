@@ -5,6 +5,10 @@ const useStyles = makeStyles((theme) => {
     root: {
       padding: "20px",
       transition: "0.3s linear",
+      [`${theme.breakpoints.up("md")}`]: {
+        width: "30%",
+      },
+
       "&:hover": {
         padding: "10px",
       },
@@ -47,7 +51,8 @@ const useStyles = makeStyles((theme) => {
       },
       "100%": {
         opacity: 1,
-        right: "23.5%",
+        right: "42.2%",
+
         transform: "rotate(0deg)",
       },
     },

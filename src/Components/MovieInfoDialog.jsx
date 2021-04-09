@@ -16,13 +16,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const MovieInfoModal = ({ openModal, setOpenModal, movieInformations }) => {
   const classes = useStyles();
-
-  const { title, description, relaseDate, rate } = movieInformations;
+  const {
+    title,
+    description,
+    relaseDate,
+    rate,
+    posterPath,
+  } = movieInformations;
   const handleClose = (e) => {
     e.preventDefault();
     setOpenModal(false);
   };
-
   const body = (
     <div className={classes.root}>
       <Typography variant="h4" className={classes.modalReadMoremModal}>
@@ -48,14 +52,18 @@ const MovieInfoModal = ({ openModal, setOpenModal, movieInformations }) => {
   return (
     <div>
       <Dialog fullScreen open={openModal} TransitionComponent={Transition}>
+        <img
+          src={`https://image.tmdb.org/t/p/w500/${posterPath}`}
+          alt="movieimage"
+          className={classes.dialogImage}
+        />
         <IconButton
-          edge="start"
-          color="primary"
           onClick={handleClose}
+          edge="start"
           aria-label="close"
           className={classes.dialogCloseButton}
         >
-          <FontAwesomeIcon icon={faTimesCircle} />
+          <FontAwesomeIcon icon={faTimesCircle} style={{ color: "#ef6c00" }} />
         </IconButton>
         {body}
       </Dialog>
